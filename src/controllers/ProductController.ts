@@ -14,11 +14,11 @@ class ProductController {
     }
 
     getProducts = (request: express.Request, response: express.Response) => {
-        response.send('All Products')
+        response.send('All Products');
     }
 
     getProduct = (request: express.Request, response: express.Response) => {
-        response.send(`Single product ${request.params.id}`);
+        response.send(`Single products Edit ${request.params.id}`);
     }
 }
 
