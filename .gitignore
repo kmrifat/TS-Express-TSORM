@@ -1,0 +1,5 @@
+node_modules
+.idea/
+database.sqlite
+package-lock.json
+.vscode/
