@@ -12,7 +12,13 @@ export class User {
     @Column()
     lastName: string;
 
-    @Column()
+    @Column({nullable: true})
+    photo: string;
+
+    @Column({unique: true})
+    email: string;
+
+    @Column({nullable: true})
     age: number;
 
     @Column()

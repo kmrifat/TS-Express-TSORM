@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as cors from "cors";
 
 class App {
 
@@ -24,6 +25,7 @@ class App {
      */
     private initializeMiddlewares() {
         this.app.use(bodyParser.json())
+        this.app.use(cors());
     }
 
     /**
