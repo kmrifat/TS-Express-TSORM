@@ -1,12 +1,15 @@
 import * as express from 'express';
 import {getConnection, getRepository} from "typeorm";
 import {User} from "../entity/User";
+import AuthMiddleware from "../middlewares/AuthMiddleware";
 
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
 
 export default class AuthController {
     public path = '/oauth';
     public router = express.Router();
+    public authMiddleware = new AuthMiddleware();
 
     constructor() {
         this.initializeRoutes();
@@ -22,9 +25,13 @@ export default class AuthController {
         if (typeof user != 'undefined') {
             let match = bcrypt.compareSync(request.body.password, user.password);
             if (match) {
-                return response.json(user)
+                const token = this.authMiddleware.generateToken(user);
+                return response.json({
+                    // user,
+                    token
+                })
             } else {
-                return response.status(403).json({'message': 'Credentials does not match'});
+                return response.status(422).json({'message': 'Credentials does not match'});
             }
         } else {
             return response.status(422).json({'message': 'Credentials does not match'});

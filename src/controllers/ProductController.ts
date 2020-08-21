@@ -1,7 +1,7 @@
 import * as express from 'express';
 
 class ProductController {
-    public path = '/';
+    public path = '/product';
     public router = express.Router()
 
     constructor() {
@@ -10,7 +10,7 @@ class ProductController {
 
     public intializeRoutes() {
         this.router.get(this.path, this.getProducts);
-        this.router.get(`${this.path}:id`, this.getProduct);
+        this.router.get(`${this.path}/:id`, this.getProduct);
     }
 
     getProducts = (request: express.Request, response: express.Response) => {
